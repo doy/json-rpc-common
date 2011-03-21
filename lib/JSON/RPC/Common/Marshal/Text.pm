@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 package JSON::RPC::Common::Marshal::Text;
-use Moose;
+use Any::Moose;
 # ABSTRACT: JSON text marshalling for L<JSON::RPC::Common>.
 
 use Carp qw(croak);

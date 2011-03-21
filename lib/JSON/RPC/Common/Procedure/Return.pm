@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 package JSON::RPC::Common::Procedure::Return;
-use Moose;
+use Any::Moose;
 # ABSTRACT: JSON-RPC procedure return class
 
 use Carp qw(croak);
