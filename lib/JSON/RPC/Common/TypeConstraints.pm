@@ -8,11 +8,24 @@ use warnings;
 
 use Any::Moose ('X::Types' => [-declare => [qw(JSONDefined JSONValue JSONContainer)]]);
 
-subtype JSONDefined, as 'Value|ArrayRef|HashRef';
+BEGIN{
+  my @types = qw(Value ArrayRef HashRef Undef);
+  my $PREFERRED = $Any::Moose::PREFERRED;
+  my $type_module = $PREFERRED.'X::Types::'.$PREFERRED;
 
-subtype JSONValue, as 'Undef|Value|ArrayRef|HashRef';
+  eval "require $type_module" or die $@;
+  $type_module->import(@types);
+}
 
-subtype JSONContainer, as 'ArrayRef|HashRef';
+if( Any::Moose::moose_is_preferred ){
+  subtype JSONDefined, as Value|ArrayRef|HashRef;
+  subtype JSONValue, as Undef|Value|ArrayRef|HashRef;
+  subtype JSONContainer, as ArrayRef|HashRef;
+}else{
+  subtype JSONDefined, as 'Value|ArrayRef|HashRef';
+  subtype JSONValue, as 'Undef|Value|ArrayRef|HashRef';
+  subtype JSONContainer, as 'ArrayRef|HashRef';
+}
 
 __PACKAGE__
 
