@@ -47,7 +47,7 @@ has expand => (
 has expander => (
 	is  => "rw",
 	isa => ClassName|Object,
-	lazy_build => 1,
+	lazy => 1, builder => 1, clearer => 1, predicate => 1,
 	handles => [qw(expand_hash collapse_hash)],
 );
 
@@ -60,7 +60,7 @@ sub _build_expander {
 has user_agent => (
 	isa => Str,
 	is  => "rw",
-	lazy_build => 1,
+	lazy => 1, builder => 1, clearer => 1, predicate => 1,
 );
 
 sub _build_user_agent {
@@ -78,7 +78,7 @@ has content_type => (
 has content_types => (
 	isa => HashRef[Str],
 	is  => "rw",
-	lazy_build => 1,
+	lazy => 1, builder => 1, clearer => 1, predicate => 1,
 );
 
 sub _build_content_types {
@@ -98,7 +98,7 @@ has accept_content_type => (
 has accept_content_types => (
 	isa => HashRef[Str],
 	is  => "rw",
-	lazy_build => 1,
+	lazy => 1, builder => 1, clearer => 1, predicate => 1,
 );
 
 sub _build_accept_content_types {

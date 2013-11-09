@@ -18,7 +18,7 @@ has json => (
 	isa => Object,
 	is  => "rw",
 	handles => [qw(encode decode)],
-	lazy_build => 1,
+	lazy => 1, builder => 1, clearer => 1, predicate => 1
 );
 
 sub _build_json {
