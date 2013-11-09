@@ -67,3 +67,4 @@ sub _version_class {
 
 __PACKAGE__
 
+__END__
