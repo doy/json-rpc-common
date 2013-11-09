@@ -161,6 +161,8 @@ __PACKAGE__->meta->make_immutable;
 
 __PACKAGE__
 
+__END__
+
 =pod
 
 =head1 SYNOPSIS
