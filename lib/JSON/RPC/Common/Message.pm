@@ -5,6 +5,7 @@ use Moose::Role;
 # ABSTRACT: JSON-RPC message role
 
 use Carp qw(croak);
+use Class::Load qw();
 
 use namespace::clean -except => [qw(meta)];
 
@@ -28,7 +29,7 @@ sub inflate {
 
 	my $subclass = $class->_version_class( $class->_get_version($data), $data );
 
-	Class::MOP::load_class($subclass);
+	Class::Load::load_class($subclass);
 
 	$subclass->new_from_data(%$data);
 }
