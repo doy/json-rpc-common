@@ -59,7 +59,7 @@ JSON
 	foreach my $req ( keys %required ) {
 		throws_ok {
 			$m_json->json_to_call($required{$req});
-		} qr/\Q$req\E.*required/, "required param $req";
+		} qr/\AMissing required arguments/, "required param $req";
 	}
 
 	dies_ok { $m_json->json_to_call("adtjhat3!!!!") } "JSON parse error";
