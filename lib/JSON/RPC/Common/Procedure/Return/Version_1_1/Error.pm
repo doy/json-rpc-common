@@ -1,10 +1,11 @@
 #!/usr/bin/perl
 
 package JSON::RPC::Common::Procedure::Return::Version_1_1::Error;
-use Moose;
+use Moo;
 # ABSTRACT: JSON-RPC 1.1 error class.
 
 use JSON::RPC::Common::TypeConstraints qw(JSONValue);
+use Types::Standard -types;
 
 use namespace::clean -except => [qw(meta)];
 

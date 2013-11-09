@@ -1,10 +1,12 @@
 #!/usr/bin/perl
 
 package JSON::RPC::Common::Message;
-use Moose::Role;
+use Moo::Role;
 # ABSTRACT: JSON-RPC message role
 
-use Carp qw(croak);
+use Carp qw(croak confess);
+use Class::Load qw();
+use Types::Standard -types;
 
 use namespace::clean -except => [qw(meta)];
 
@@ -17,7 +19,7 @@ sub inflate {
 	if (@args == 1) {
 		if (defined $args[0]) {
 			no warnings 'uninitialized';
-			(ref($args[0]) eq 'HASH')
+			HashRef->check($args[0])
 			|| confess "Single parameters to inflate() must be a HASH ref";
 			$data = $args[0];
 		}
@@ -28,7 +30,7 @@ sub inflate {
 
 	my $subclass = $class->_version_class( $class->_get_version($data), $data );
 
-	Class::MOP::load_class($subclass);
+	Class::Load::load_class($subclass);
 
 	$subclass->new_from_data(%$data);
 }
@@ -67,3 +69,4 @@ sub _version_class {
 
 __PACKAGE__
 
+__END__

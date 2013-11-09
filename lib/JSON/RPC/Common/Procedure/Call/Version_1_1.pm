@@ -1,12 +1,13 @@
 #!/usr/bin/perl
 
 package JSON::RPC::Common::Procedure::Call::Version_1_1;
-use Moose;
+use Moo;
 # ABSTRACT: JSON-RPC 1.1 Procedure Call
 
 use MRO::Compat;
 
 use JSON::RPC::Common::TypeConstraints qw(JSONContainer);
+use Types::Standard -types;
 
 use JSON::RPC::Common::Procedure::Return::Version_1_1;
 
@@ -40,7 +41,7 @@ has '+version' => (
 );
 
 has alt_spec => (
-	isa => "Bool",
+	isa => Bool,
 	is  => "rw",
 	default => 0,
 );

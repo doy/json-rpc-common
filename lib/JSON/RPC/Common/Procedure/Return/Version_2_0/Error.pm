@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 package JSON::RPC::Common::Procedure::Return::Version_2_0::Error;
-use Moose;
+use Moo;
 # ABSTRACT: JSON-RPC 2.0 error class.
 
 use JSON::RPC::Common::TypeConstraints qw(JSONValue);
