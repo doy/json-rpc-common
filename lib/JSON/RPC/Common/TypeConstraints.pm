@@ -28,7 +28,7 @@ __END__
 
 =head1 DESCRIPTION
 
-See L<MooseX::Types>
+See L<Type::Library>
 
 =head1 TYPES
 

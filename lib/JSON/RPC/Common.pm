@@ -3,7 +3,7 @@
 package JSON::RPC::Common;
 # ABSTRACT: Transport agnostic JSON RPC helper objects
 
-*VERSION = \0 unless defined our $VERSION;
+*VERSION = \0 unless defined our $VERSION;  # for the benefit of `prove -l`
 
 __PACKAGE__
 
@@ -129,17 +129,12 @@ for an example
 
 =item *
 
-L<Moose> class to SMD translator
+L<Moo>/L<Moose> class to SMD translator
 
 =item *
 
 L<MooseX::Storage> enabled objects can serialize themselves into JSON, and
 should DWIM when used. JSON-RPC 1.0 class hints could be used here too.
-
-=item *
-
-Convert to L<Squirrel> for smaller deps and faster load time. Need to find a
-solution for roles and type constraints. Neither is relied on heavily.
 
 =back
 
