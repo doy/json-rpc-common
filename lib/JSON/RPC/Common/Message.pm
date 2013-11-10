@@ -5,7 +5,7 @@ use Moo::Role;
 # ABSTRACT: JSON-RPC message role
 
 use Carp qw(croak confess);
-use Class::Load qw();
+use Module::Runtime qw(use_package_optimistically);
 use Types::Standard -types;
 
 use namespace::clean -except => [qw(meta)];
@@ -30,7 +30,7 @@ sub inflate {
 
 	my $subclass = $class->_version_class( $class->_get_version($data), $data );
 
-	Class::Load::load_class($subclass);
+	use_package_optimistically($subclass);
 
 	$subclass->new_from_data(%$data);
 }

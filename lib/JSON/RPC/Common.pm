@@ -3,6 +3,8 @@
 package JSON::RPC::Common;
 # ABSTRACT: Transport agnostic JSON RPC helper objects
 
+*VERSION = \0 unless defined our $VERSION;
+
 __PACKAGE__
 
 __END__
