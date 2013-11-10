@@ -5,7 +5,7 @@ use warnings;
 
 use Test::More 'no_plan';
 
-use Test::Exception;
+use Test::Fatal;
 
 use JSON;
 
@@ -57,12 +57,13 @@ JSON
 	);
 
 	foreach my $req ( keys %required ) {
-		throws_ok {
+		my $e = exception {
 			$m_json->json_to_call($required{$req});
-		} qr/\AMissing required arguments/, "required param $req";
+		};
+		like $e, qr/\AMissing required arguments/, "required param $req";
 	}
 
-	dies_ok { $m_json->json_to_call("adtjhat3!!!!") } "JSON parse error";
+	ok exception { $m_json->json_to_call("adtjhat3!!!!") }, "JSON parse error";
 }
 
 
