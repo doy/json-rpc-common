@@ -1,13 +1,14 @@
 #!/usr/bin/perl
 
 package JSON::RPC::Common::Procedure::Return;
-use Moose;
+use Moo;
 # ABSTRACT: JSON-RPC procedure return class
 
 use Carp qw(croak);
 
 use JSON::RPC::Common::TypeConstraints qw(JSONValue);
 use JSON::RPC::Common::Procedure::Return::Error;
+use Types::Standard -types;
 
 use namespace::clean -except => [qw(meta)];
 
@@ -25,13 +26,13 @@ around new_from_data => sub {
 };
 
 has version => (
-	isa => "Str",
+	isa => Str,
 	is  => "rw",
 	predicate => "has_version",
 );
 
 has result => (
-	isa => "Any",
+	isa => Any,
 	is  => "rw",
 	predicate => "has_result",
 );
@@ -43,13 +44,13 @@ has id => (
 );
 
 has error_class => (
-	isa => "ClassName",
+	isa => ClassName,
 	is  => "rw",
 	default => "JSON::RPC::Common::Procedure::Return::Error",
 );
 
 has error => (
-	isa => "JSON::RPC::Common::Procedure::Return::Error",
+	isa => InstanceOf["JSON::RPC::Common::Procedure::Return::Error"],
 	is  => "rw",
 	predicate => "has_error",
 );
@@ -98,6 +99,8 @@ sub create_error {
 __PACKAGE__->meta->make_immutable;
 
 __PACKAGE__
+
+__END__
 
 =pod
 

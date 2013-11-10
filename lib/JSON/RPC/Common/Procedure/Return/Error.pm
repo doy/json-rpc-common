@@ -1,10 +1,11 @@
 #!/usr/bin/perl
 
 package JSON::RPC::Common::Procedure::Return::Error;
-use Moose;
+use Moo;
 # ABSTRACT: Base class for JSON-RPC errors
 
 use JSON::RPC::Common::TypeConstraints qw(JSONValue);
+use Types::Standard -types;
 
 use namespace::clean -except => [qw(meta)];
 
@@ -52,13 +53,13 @@ has data => (
 );
 
 has message => (
-	isa => "Str",
+	isa => Str,
 	is  => "rw",
 	predicate => "has_message",
 );
 
 has code => (
-	isa => "Int",
+	isa => Int,
 	is  => "rw",
 	predicate => "has_code",
 );
@@ -69,6 +70,8 @@ sub http_status { 500 }
 __PACKAGE__->meta->make_immutable();
 
 __PACKAGE__
+
+__END__
 
 =pod
 

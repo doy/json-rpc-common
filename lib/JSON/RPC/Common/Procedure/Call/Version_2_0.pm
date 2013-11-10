@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 package JSON::RPC::Common::Procedure::Call::Version_2_0;
-use Moose;
+use Moo;
 # ABSTRACT: JSON-RPC 2.0 Procedure Call
 
 use JSON::RPC::Common::TypeConstraints qw(JSONContainer);
@@ -37,6 +37,8 @@ sub deflate_version {
 __PACKAGE__->meta->make_immutable;
 
 __PACKAGE__
+
+__END__
 
 =pod
 

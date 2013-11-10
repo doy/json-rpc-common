@@ -1,10 +1,11 @@
 #!/usr/bin/perl
 
 package JSON::RPC::Common::Procedure::Call::Version_1_0;
-use Moose;
+use Moo;
 # ABSTRACT: JSON-RPC 1.0 request
 
 use JSON::RPC::Common::Procedure::Return::Version_1_0;
+use Types::Standard -types;
 
 use namespace::clean -except => [qw(meta)];
 
@@ -16,7 +17,7 @@ has '+version' => (
 );
 
 has '+params' => (
-	isa => "ArrayRef",
+	isa => ArrayRef,
 	required => 1,
 );
 
@@ -50,6 +51,8 @@ sub deflate_id {
 __PACKAGE__->meta->make_immutable;
 
 __PACKAGE__
+
+__END__
 
 =pod
 

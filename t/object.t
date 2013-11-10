@@ -9,7 +9,7 @@ use JSON::RPC::Common::Procedure::Call;
 
 {
 	package Foo;
-	use Moose;
+	use Moo;
 
 	sub hello {
 		my ( $self, %args ) = @_;

@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 package JSON::RPC::Common::Procedure::Return::Version_1_0::Error;
-use Moose;
+use Moo;
 # ABSTRACT: JSON-RPC 1.0 error class.
 
 use JSON::RPC::Common::TypeConstraints qw(JSONDefined);
@@ -36,6 +36,8 @@ sub deflate {
 __PACKAGE__->meta->make_immutable();
 
 __PACKAGE__
+
+__END__
 
 =pod
 

@@ -1,12 +1,14 @@
 #!/usr/bin/perl
 
 package JSON::RPC::Common::Procedure::Call;
-use Moose;
+use Moo;
 # ABSTRACT: JSON RPC Procedure Call base class.
 
 use Try::Tiny;
 use JSON::RPC::Common::TypeConstraints qw(JSONValue);
 use JSON::RPC::Common::Procedure::Return;
+use Types::Standard -types;
+use Scalar::Util qw(blessed);
 
 use Carp qw(croak);
 
@@ -15,25 +17,25 @@ use namespace::clean -except => [qw(meta)];
 with qw(JSON::RPC::Common::Message);
 
 has return_class => (
-	isa => "ClassName",
+	isa => ClassName,
 	is  => "rw",
 	default => "JSON::RPC::Common::Procedure::Return",
 );
 
 has error_class => (
-	isa => "ClassName",
+	isa => ClassName,
 	is  => "rw",
 	default => "JSON::RPC::Common::Procedure::Return::Error",
 );
 
 has version => (
-	isa => "Str",
+	isa => Str,
 	is  => "rw",
 	predicate => "has_version",
 );
 
 has method => (
-	isa => "Str",
+	isa => Str,
 	is  => "rw",
 	required => 1,
 );
@@ -45,7 +47,7 @@ has id => (
 );
 
 has params => (
-	isa => "Ref",
+	isa => Ref,
 	is  => "rw",
 	predicate => "has_params",
 );
@@ -158,6 +160,8 @@ sub return_result {
 __PACKAGE__->meta->make_immutable;
 
 __PACKAGE__
+
+__END__
 
 =pod
 

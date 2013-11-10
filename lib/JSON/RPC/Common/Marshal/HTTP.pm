@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 package JSON::RPC::Common::Marshal::HTTP;
-use Moose;
+use Moo;
 # ABSTRACT: Convert L<HTTP::Request> and L<HTTP::Response> to/from L<JSON::RPC::Common> calls and returns.
 
 use Carp qw(croak);
@@ -10,6 +10,7 @@ use Try::Tiny;
 use URI::QueryParam;
 use MIME::Base64 ();
 use HTTP::Response;
+use Types::Standard -types;
 
 use namespace::clean -except => [qw(meta)];
 
@@ -20,32 +21,33 @@ sub _build_json {
 }
 
 has prefer_get => (
-	isa => "Bool",
+	isa => Bool,
 	is  => "rw",
 	default => 0,
 );
 
 has rest_style_methods => (
-	isa => "Bool",
+	isa => Bool,
 	is  => "rw",
 	default => 1,
 );
 
 has prefer_encoded_get => (
-	isa => "Bool",
+	isa => Bool,
 	is  => "rw",
 	default => 1,
 );
 
 has expand => (
-	isa => "Bool",
+	isa => Bool,
 	is  => "rw",
 	default => 0,
 );
 
 has expander => (
-	isa => "ClassName|Object",
-	lazy_build => 1,
+	is  => "rw",
+	isa => ClassName|Object,
+	lazy => 1, builder => 1, clearer => 1, predicate => 1,
 	handles => [qw(expand_hash collapse_hash)],
 );
 
@@ -56,9 +58,9 @@ sub _build_expander {
 
 
 has user_agent => (
-	isa => "Str",
+	isa => Str,
 	is  => "rw",
-	lazy_build => 1,
+	lazy => 1, builder => 1, clearer => 1, predicate => 1,
 );
 
 sub _build_user_agent {
@@ -68,15 +70,15 @@ sub _build_user_agent {
 }
 
 has content_type => (
-	isa => "Str",
+	isa => Str,
 	is  => "rw",
 	predicate => "has_content_type",
 );
 
 has content_types => (
-	isa => "HashRef[Str]",
+	isa => HashRef[Str],
 	is  => "rw",
-	lazy_build => 1,
+	lazy => 1, builder => 1, clearer => 1, predicate => 1,
 );
 
 sub _build_content_types {
@@ -88,15 +90,15 @@ sub _build_content_types {
 }
 
 has accept_content_type => (
-	isa => "Str",
+	isa => Str,
 	is  => "rw",
 	predicate => "has_accept_content_type",
 );
 
 has accept_content_types => (
-	isa => "HashRef[Str]",
+	isa => HashRef[Str],
 	is  => "rw",
-	lazy_build => 1,
+	lazy => 1, builder => 1, clearer => 1, predicate => 1,
 );
 
 sub _build_accept_content_types {
@@ -469,6 +471,8 @@ sub result_to_response_params {
 __PACKAGE__->meta->make_immutable();
 
 __PACKAGE__
+
+__END__
 
 =pod
 

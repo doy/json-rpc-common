@@ -1,10 +1,11 @@
 #!/usr/bin/perl
 
 package JSON::RPC::Common::Marshal::Text;
-use Moose;
+use Moo;
 # ABSTRACT: JSON text marshalling for L<JSON::RPC::Common>.
 
 use Carp qw(croak);
+use Types::Standard -types;
 
 use JSON ();
 use JSON::RPC::Common::Message;
@@ -14,10 +15,10 @@ use JSON::RPC::Common::Procedure::Return;
 use namespace::clean -except => [qw(meta)];
 
 has json => (
-	isa => "Object",
+	isa => Object,
 	is  => "rw",
 	handles => [qw(encode decode)],
-	lazy_build => 1,
+	lazy => 1, builder => 1, clearer => 1, predicate => 1
 );
 
 sub _build_json {
@@ -25,21 +26,21 @@ sub _build_json {
 }
 
 has message_class => (
-	isa => "ClassName",
+	isa => ClassName,
 	is  => "rw",
 	default => "JSON::RPC::Common::Message",
 	handles => { "inflate_message" => "inflate" },
 );
 
 has call_class => (
-	isa => "ClassName",
+	isa => ClassName,
 	is  => "rw",
 	default => "JSON::RPC::Common::Procedure::Call",
 	handles => { "inflate_call" => "inflate" },
 );
 
 has return_class => (
-	isa => "ClassName",
+	isa => ClassName,
 	is  => "rw",
 	default => "JSON::RPC::Common::Procedure::Return",
 	handles => { "inflate_return" => "inflate" },
@@ -95,6 +96,8 @@ sub json_to_return {
 __PACKAGE__->meta->make_immutable();
 
 __PACKAGE__
+
+__END__
 
 =pod
 
