@@ -409,7 +409,12 @@ sub response_to_result_success {
 sub response_to_result_error {
 	my ( $self, $response ) = @_;
 
-	my $res = $self->json_to_return( $response->content );
+	my $res;
+	try {
+		$res = $self->json_to_return( $response->content );
+	} catch {
+		$res = JSON::RPC::Common::Procedure::Return->new;
+	};
 
 	unless ( $res->has_error ) {
 		$res->set_error(
