@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 package JSON::RPC::Common::Procedure::Call::Version_2_0;
-use Moose;
+use Any::Moose;
 # ABSTRACT: JSON-RPC 2.0 Procedure Call
 
 use JSON::RPC::Common::TypeConstraints qw(JSONContainer);

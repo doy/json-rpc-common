@@ -1,7 +1,8 @@
 #!/usr/bin/perl
 
 package JSON::RPC::Common::Message;
-use Moose::Role;
+use Any::Moose 'Role';
+use JSON::RPC::Common::Util;
 # ABSTRACT: JSON-RPC message role
 
 use Carp qw(croak);
@@ -28,7 +29,7 @@ sub inflate {
 
 	my $subclass = $class->_version_class( $class->_get_version($data), $data );
 
-	Class::MOP::load_class($subclass);
+	JSON::RPC::Common::Util::load_class($subclass);
 
 	$subclass->new_from_data(%$data);
 }
