@@ -28,7 +28,7 @@ sub inflate {
 
 	my $subclass = $class->_version_class( $class->_get_version($data), $data );
 
-	Class::MOP::load_class($subclass);
+	Class::Load::load_class($subclass);
 
 	$subclass->new_from_data(%$data);
 }
